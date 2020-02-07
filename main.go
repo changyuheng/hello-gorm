@@ -100,14 +100,17 @@ func main() {
 	fmt.Println("hello")
 	GetSqliteDatabase().Init("hello-gorm.db")
 	statusModel := NewStatusModel()
-	statusModel.BeatHeart()
 
-	finished := make(chan bool)
-	go func() {
-		time.Sleep(1 * time.Second)
-		finished <- true
-	}()
+	// finished := make(chan bool)
+	// go func() {
+	for {
+		statusModel.BeatHeart()
+		fmt.Println("heartbeat")
+		time.Sleep(10 * time.Second)
+	}
+	// finished <- true
+	// }()
 
-	<-finished
-	fmt.Println("gorm")
+	// <-finished
+	// fmt.Println("gorm")
 }
